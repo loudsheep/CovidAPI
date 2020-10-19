@@ -12,3 +12,6 @@ class Reader:
         top = Top(self.connection.get_data(), key)
 
         return top.get(num)
+
+    def get_country(self):
+        pass
