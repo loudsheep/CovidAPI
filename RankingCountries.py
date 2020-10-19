@@ -16,4 +16,4 @@ class RankingCountries:
             self.new_deaths) + ", Date: " + str(self.date) + "\n"
 
     def __repr__(self):
-        return "Country & date: " + self.country + " : " + self.date
+        return "Country & new confirmed: " + self.country + " - " + str(self.new_confirmed)

@@ -18,6 +18,9 @@ class Reader:
     def get_country(self, name):
         self.connection = Connect(self.path + "dayone/country/" + name)
         if self.connection.status_code() == 200:
-            country = Country(self.connection.get_data_json())
+            return Country(self.connection.get_data_json())
 
-            return country
+    def data_for_graph(self, country, key):
+        self.connection = Connect(self.path + "dayone/country/" + country)
+        if self.connection.status_code() == 200:
+            return Country(self.connection.get_data_json()).to_array(key)

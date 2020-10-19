@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class Day:
     def __init__(self, line):
         self.line = line
@@ -13,6 +16,15 @@ class Day:
 
     def __repr__(self):
         return self.__str__()
+
+
+class DataType(Enum):
+    CONFIRMED = 0
+    DEATHS = 1
+    RECOVERED = 2
+    ACTIVE = 3
+    NEW_CONFIRMED = 4
+    NEW_DEATHS = 5
 
 
 class Country:
@@ -38,6 +50,31 @@ class Country:
             s += diff
 
         return s / len(self.days)
+
+    def to_array(self, key):
+        if key == DataType.CONFIRMED:
+            return [int(i.confirmed) for i in self.days]
+
+        if key == DataType.DEATHS:
+            return [int(i.deaths) for i in self.days]
+
+        if key == DataType.RECOVERED:
+            return [int(i.recovered) for i in self.days]
+
+        if key == DataType.ACTIVE:
+            return [int(i.active) for i in self.days]
+
+        if key == DataType.NEW_CONFIRMED:
+            data = [self.days[0].confirmed]
+            for i in range(1, len(self.days)):
+                data.append(int(self.days[i].confirmed) - int(self.days[i - 1].confirmed))
+            return data
+
+        if key == DataType.NEW_DEATHS:
+            data = [self.days[0].deaths]
+            for i in range(1, len(self.days)):
+                data.append(int(self.days[i].deaths) - int(self.days[i - 1].deaths))
+            return data
 
     def __str__(self):
         return str([x.__str__() for x in self.days])
