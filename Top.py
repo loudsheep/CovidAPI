@@ -1,4 +1,4 @@
-from Country import Country
+from RankingCountries import RankingCountries
 
 
 class Top:
@@ -9,8 +9,8 @@ class Top:
     def get(self, num):
         data = sorted(self.data["Countries"], key=lambda x: x[self.key], reverse=True)
 
-        data2 = []
-        for i in range(num) :
-            data2.append(Country(data[i]))
+        countries = []
+        for i in range(num):
+            countries.append(RankingCountries(data[i]))
 
-        return data2
+        return countries

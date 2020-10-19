@@ -1,21 +1,46 @@
-import json
+class Day:
+    def __init__(self, line):
+        self.line = line
+        self.country = line['Country']
+        self.confirmed = line['Confirmed']
+        self.deaths = line['Deaths']
+        self.recovered = line['Recovered']
+        self.active = line['Active']
+        self.date = line['Date']
+
+    def __str__(self):
+        return "Country: " + self.country + " Confirmed: " + str(self.confirmed) + " Deaths: " + str(self.deaths)
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Country:
     def __init__(self, data):
         self.data = data
-        # json.dump(data, sort_keys=False, fp=self.data)
-        self.country = self.data['Country']
-        self.country_code = self.data['CountryCode']
-        self.slug = self.data['Slug']
-        self.new_confirmed = self.data['NewConfirmed']
-        self.total_confirmed = self.data['TotalConfirmed']
-        self.new_deaths = self.data['NewDeaths']
-        self.total_deaths = self.data['TotalDeaths']
-        self.date = self.data['Date']
+        self.days = []
+
+        for i in range(len(data)):
+            self.days.append(Day(data[i]))
+
+    def get_max_new_confirmed(self):
+        max_diff = -1
+        for i in range(1, len(self.days)):
+            diff = int(self.days[i].confirmed) - int(self.days[i - 1].confirmed)
+            if diff > max_diff:
+                max_diff = diff
+        return max_diff
+
+    def get_avg_new_confirmed(self):
+        s = 0
+        for i in range(1, len(self.days)):
+            diff = int(self.days[i].confirmed) - int(self.days[i - 1].confirmed)
+            s += diff
+
+        return s / len(self.days)
 
     def __str__(self):
-        return "Country: " + self.country + ", New Confirmed: " + str(self.new_confirmed) + ", New Deaths: " + str(self.new_deaths) + ", Date: " +str(self.date) + "\n"
+        return str([x.__str__() for x in self.days])
 
     def __repr__(self):
-        return "Country & date: " + self.country + " : " + self.date
+        return str([x.country + " " + x.date for x in self.days])

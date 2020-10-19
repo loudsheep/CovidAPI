@@ -1,5 +1,6 @@
 from Connect import Connect
 from Top import Top
+from Country import Country
 
 
 class Reader:
@@ -9,9 +10,14 @@ class Reader:
 
     def get_top(self, key, num):
         self.connection = Connect(self.path + "summary")
-        top = Top(self.connection.get_data(), key)
+        if self.connection.status_code() == 200:
+            top = Top(self.connection.get_data_json(), key)
 
-        return top.get(num)
+            return top.get(num)
 
-    def get_country(self):
-        pass
+    def get_country(self, name):
+        self.connection = Connect(self.path + "dayone/country/" + name)
+        if self.connection.status_code() == 200:
+            country = Country(self.connection.get_data_json())
+
+            return country
