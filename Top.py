@@ -10,7 +10,11 @@ class Top:
         data = sorted(self.data["Countries"], key=lambda x: x[self.key], reverse=True)
 
         countries = []
-        for i in range(num):
-            countries.append(RankingCountries(data[i]))
+        if num == "ALL":
+            for i in data:
+                countries.append(RankingCountries(i))
+        else:
+            for i in range(num):
+                countries.append(RankingCountries(data[i]))
 
         return countries

@@ -12,7 +12,6 @@ class Reader:
         self.connection = Connect(self.path + "summary")
         if self.connection.status_code() == 200:
             top = Top(self.connection.get_data_json(), key)
-
             return top.get(num)
 
     def get_country(self, name):

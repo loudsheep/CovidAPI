@@ -67,13 +67,19 @@ class Country:
         if key == DataType.NEW_CONFIRMED:
             data = [self.days[0].confirmed]
             for i in range(1, len(self.days)):
-                data.append(int(self.days[i].confirmed) - int(self.days[i - 1].confirmed))
+                x = int(self.days[i].confirmed) - int(self.days[i - 1].confirmed)
+                if x < 0:
+                    x = 0
+                data.append(x)
             return data
 
         if key == DataType.NEW_DEATHS:
             data = [self.days[0].deaths]
             for i in range(1, len(self.days)):
-                data.append(int(self.days[i].deaths) - int(self.days[i - 1].deaths))
+                x = int(self.days[i].deaths) - int(self.days[i - 1].deaths)
+                if x < 0:
+                    x = 0
+                data.append(x)
             return data
 
     def __str__(self):

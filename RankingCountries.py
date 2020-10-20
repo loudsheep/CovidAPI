@@ -17,3 +17,27 @@ class RankingCountries:
 
     def __repr__(self):
         return "Country & new confirmed: " + self.country + " - " + str(self.new_confirmed)
+
+    def get_country(self):
+        return self.country
+
+    def get_new_confirmed(self):
+        return self.new_confirmed
+
+    def get_country_code(self):
+        return self.country_code
+
+    def get_slug(self):
+        return self.slug
+
+    def get_total_confirmed(self):
+        return self.total_confirmed
+
+    def get_new_deaths(self):
+        return self.new_deaths
+
+    def get_total_deaths(self):
+        return self.total_deaths
+
+    def get_date(self):
+        return self.date

@@ -14,3 +14,9 @@ class Connect:
 
     def get_data_original(self):
         return self.connection
+
+    def __str__(self):
+        return "Connection to: " + self.path + " Status code: " + str(self.status_code());
+
+    def __repr__(self):
+        return self.__str__();
